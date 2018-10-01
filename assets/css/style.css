@@ -1,0 +1,60 @@
+body {
+    background-image: url('../img/extra_clean_paper.png');
+    background-repeat: repeat;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* chat styling */
+#chat textarea {
+    width: 100%;
+    resize: none;
+}
+  
+  #chat-messages ul {
+    list-style: none;
+    padding-left: 10px;
+}
+  
+  #chat-messages {
+    overflow-y: auto;
+}
+  
+  #send-chat {
+    float: right;
+}
+
+/* games list styling */
+#games ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+/* .container {
+    min-height: 100 vh;
+}
+
+.row {
+    background-color: white;
+}
+
+#main-game {
+    border: 2px solid blue;
+}
+
+.selector {
+    height: 50%;
+    width: 100%;
+}
+
+.rps {
+    height: 50%;
+    width: 33%;
+} */
