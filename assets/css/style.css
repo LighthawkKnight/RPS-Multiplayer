@@ -4,6 +4,24 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+/* accounts / session styling */
+#logout {
+  display: none;
+}
+
+#google-signin {
+  margin-top: 20px;
+}
+
+#google-signin img {
+  cursor: pointer;
+}
+
+#google-signin strong {
+  display: block;
+  margin-bottom: 20px;
+}
+
 /* chat styling */
 #chat textarea {
     width: 100%;
@@ -31,30 +49,3 @@ body {
 
 
 
-
-
-
-
-
-
-/* .container {
-    min-height: 100 vh;
-}
-
-.row {
-    background-color: white;
-}
-
-#main-game {
-    border: 2px solid blue;
-}
-
-.selector {
-    height: 50%;
-    width: 100%;
-}
-
-.rps {
-    height: 50%;
-    width: 33%;
-} */
