@@ -79,7 +79,7 @@ var Authenticate = (function(){
         if (validate([email, password])) {
             // This calls firebase's signInWithEmailAndPassword's function as opposed to this one
             firebase.auth().signInWithEmailAndPassword(email.value, password.value).then(function(user) {
-                console.log ("Sign in successful with user: " + user);
+                console.log ("Sign in successful with user: " + user.email);
             }, function(e){
                 console.error("Sign in error", e);
             });
@@ -180,7 +180,7 @@ var Chat = (function(){
     var send = document.querySelector('#send-chat-button');
     var messageField = document.querySelector('#chat-message-field');
     var messageList = document.querySelector('#chat-message-list')
-    // var messages = document.querySelector('#chat-messages');
+    var messages = document.querySelector('#chat-messages')
     var chatRef = firebase.database().ref("/chat");
 
     // Push chat messages to firebase, which handles authentication automatically
@@ -191,7 +191,12 @@ var Chat = (function(){
             name: firebase.auth().currentUser.displayName,
             message: messageField.value
         }, function (e) {
-            console.error ("Chat message push error", e);
+            if (e)
+                console.error ("Chat message push error", e);
+            else {
+                messageField.value = "";
+                messageField.parentElement.classList.remove("is-dirty")
+            }
             enableChat(true);
         });
     }
@@ -204,9 +209,13 @@ var Chat = (function(){
 
             // Adds message w/name passed in into the chat box
     function addChatMessage(name, message) {
-        var chatMessage = $("<li>");
-        chatMessage.html("<b>" + name + "</b>: " + message);
+        // var chatMessage = $("<li>");
+        // chatMessage.html("<b>" + name + "</b>: " + message);
+        chatMessage = document.createElement("li");
+        chatMessage.innerHTML = "<strong>" + name + "</strong>: " + message;
+        console.log(chatMessage);
         messageList.append(chatMessage);
+        messages.scrollTop = messageList.scrollHeight;
     }
 
     // public functions
@@ -221,7 +230,10 @@ var Chat = (function(){
             // and triggers again once the user types a new message
             chatRef.on("child_added", function(snapshot){
                 var newMessage = snapshot.val();
+                console.log(newMessage);
                 addChatMessage(newMessage.name, newMessage.message);
+            }, function (e){
+                console.error("Child added error", e);
             })
         },
 
