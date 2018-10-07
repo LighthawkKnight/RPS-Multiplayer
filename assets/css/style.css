@@ -47,5 +47,11 @@ body {
     padding-left: 10px;
 }
 
+.image-wrapper {
+  text-align: center;
+}
+
+.image-wrapper img{
+}
 
 

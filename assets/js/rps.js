@@ -124,11 +124,11 @@ var Authenticate = (function(){
             document.querySelector("#login").style.display = "none";
             document.querySelector("#logout").style.display = "block";
             Chat.onlogin();
-            // Game.onlogin();
         }
         else {   // log out
             if (loggedIn) {
                 loggedIn = false;
+
                 window.location.reload();
             }
         }
@@ -154,9 +154,7 @@ var Authenticate = (function(){
             // Logout button to top right
             document.querySelector("#logout").addEventListener("click", function(){
                 firebase.auth().signOut();
-                var logoutMessage = $("<li>");
-                logoutMessage.html("<b>You have succesfully signed out!</b>");
-                Chat.messageList.append(logoutMessage);
+                firebase.database().ref("/chat").remove();
             }, function(e) {
                 console.error("Logout error", e);            
             });
@@ -245,6 +243,39 @@ var Chat = (function(){
         },   
     }
 })();
+
+
+function isWin(yourRPS, oppRPS) {
+    if (yourRPS === oppRPS)
+        return 'draw';
+    else if (yourRPS == 'rock') {
+        switch(oppRPS){
+            case 'paper':
+                return 'lose';
+            case 'scissors':
+                return 'win';
+        }
+    }
+    else if (yourRPS == 'paper') {
+        switch(oppRPS){
+            case 'rock':
+                return 'win';
+            case 'scissors':
+                return 'lose';
+        }       
+    }
+    else if (yourRPS == 'scissors') {
+        switch(oppRPS){
+            case 'rock':
+                return 'lose';
+            case 'paper':
+                return 'win';
+        }
+    }
+    else
+        return null;
+}
+
 
 Authenticate.init();
 Chat.init();
